@@ -7,10 +7,10 @@ define('SENHA', '');
 define('DB', 'tcc');
 
 
-$cadastro = mysqli_connect(HOST, USUARIO, SENHA, DB) or die ('Não foi possível conectar');
-mysqli_set_charset($cadastro,'utf8');
+$conexao = mysqli_connect(HOST, USUARIO, SENHA, DB) or die ('Não foi possível conectar');
+mysqli_set_charset($conexao,'utf8');
 
- if(!$cadastro){
+ if(!$conexao){
  echo"Não foi possivel cadastrar-se no banco ". PHP_EOL;
 
  echo"Debugging erro:". mysqli_connect_error().PHP_EOL;

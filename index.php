@@ -1,18 +1,22 @@
 <?php
    
    if (isset($_GET["erro"]) && $_GET["erro"] == "1")
-        $mensagem = "<br><span style='color: red;'>Usuário ou senha 
+        $mensagem = "<br><span style='color: red;'>Email ou senha 
                        incorretos tente novamente</span>";
    else {
 	  
 	  if (isset($_GET["erro"]) && $_GET["erro"] == "2")
 	    $mensagem = "<br><span style='color: green;'>Sua sessão 
 	       expirou ou você está tentando acessar uma página
-	       sem autorização! </span>";
+	       sem autorização! </span>"; 
 	  else 
 	     $mensagem = "";
    }
+
 ?>
+
+
+
 
 <html>
 
@@ -39,10 +43,9 @@
 	   
 	   <?php echo $mensagem; ?>
 	   
-	 
 
 	 <input type="submit" value="Entrar">
-		<li><a href="cadastro_formulario.php">Faça cadastro</a></li>
+		<li><a href="cadastro_usuario.php">Faça cadastro</a></li>
 
 	</form>
 	</center>

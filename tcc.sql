@@ -7,7 +7,8 @@ CREATE TABLE `usuario` (
   `senha` varchar(20) NOT NULL,
   `cidade` varchar (20) NOT NULL,
   `estado` varchar (2) NOT NULL,
-  `telefone` varchar (14) DEFAULT NULL
+  `telefone` varchar (14) DEFAULT NULL,
+   `email` varchar(100) NOT NULL
 );
 
 CREATE TABLE `notificacao` (
