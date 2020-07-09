@@ -1,4 +1,4 @@
-<?php include_once("validar_sessao.php"); ?>
+<?php include_once("../utils/validar_sessao.php"); ?>
 
 <html>
 

@@ -3,6 +3,6 @@
   session_start();
   
   if (isset($_SESSION["email"]) == false)
-      header("location: index.php?erro=2")
+      header("location: ..?erro=2")
 
 ?>

@@ -1,6 +1,6 @@
 <?php
     session_start();
-    include "conexao.php";
+    include "../bd/conexao.php";
 
     $nome = NULL; 
     $email = NULL;
@@ -60,14 +60,16 @@
         
 
         if(count($mensagens) === 0) {
+            $senha_hashed = password_hash($senha_1, PASSWORD_DEFAULT);
             $stmt = $conexao->prepare("insert into usuario (nome,senha,cidade,estado,telefone,email) values(?, ?, ?, ?, ?,?)");
-            $stmt->bind_param("ssssis", $_POST['nome'], $_POST['senha'], $_POST['cidade'], $_POST['estado'], $_POST['telefone'], $_POST['email']);
+            $stmt->bind_param("ssssss", $nome, $senha_hashed, $cidade, $estado, $telefone, $email);
             
         if ($stmt->execute()) {
                 echo "Cadastro realizado com sucesso!";
-                header("location: menu.php");
+                header("location: .");
         } else {
             echo "Execute failed: (" . $stmt->errno . ") " . $stmt->error;
+            header("location: .?erro=1");
         }
         mysqli_close($conexao);
             
