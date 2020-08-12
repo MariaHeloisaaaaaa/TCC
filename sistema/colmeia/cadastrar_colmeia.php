@@ -33,8 +33,8 @@
                 $stmt->bind_param("ssii", $identificador, $procedencia, $_GET['id'], $_SESSION["id_usuario"]);
                 echo "entrou";
             } else {
-                $stmt = $conexao->prepare("insert into colmeia (identificador,procedencia) values(?, ?)");
-                $stmt->bind_param("ss", $identificador, $procedencia);
+                $stmt = $conexao->prepare("insert into colmeia (identificador,procedencia,id_usuario) values(?, ?, ?)");
+                $stmt->bind_param("ssi", $identificador, $procedencia, $_SESSION["id_usuario"]);
             }
             var_dump($stmt);
             if ($stmt->execute()) {
@@ -91,6 +91,8 @@
 
         <input type="submit" name="cadastrar" value="Cadastrar">
     </form>
+         <li><a href="./verificacao_colmeia.php">Verificação Colméia</a></li>
+
 
     <br>
 

@@ -1,3 +1,4 @@
+
 <?php
     session_start();
     include_once "../../bd/conexao.php";
@@ -25,8 +26,8 @@
         $anotacao = isset($_POST['anotacao']) ? $_POST['anotacao'] : NULL;
 
        
-            $stmt = $conexao->prepare("insert into verificacao (data_visita, producao, postura, lamina_nova, castilho, melgueira, rainha, anotacao) values(?, ?, ?, ?, ?,?, ?, ?)");
-            $stmt->bind_param("sssssiss", $data_visita, $producao, $postura, $lamina_nova, $castilho, $melgueira, $rainha, $anotacao);
+            $stmt = $conexao->prepare("insert into verificacao (data_visita, producao, postura, lamina_nova, castilho, melgueira, rainha, anotacao, id_colmeia) values(?, ?, ?, ?, ?,?, ?, ?, ?)");
+            $stmt->bind_param("sssssissi", $data_visita, $producao, $postura, $lamina_nova, $castilho, $melgueira, $rainha, $anotacao, $id_colmeia);
             
         if ($stmt->execute()) {
                 echo "Cadastro de verificação realizado com sucesso!";
@@ -52,6 +53,26 @@
 </head>
 <body>
     <h1>Cadastro de Verificação</h1>
+
+    <forma action="" method="POST">
+        <label for="id_colmeia">Colméia</label>
+        <select name="id_colmeia">
+        <?php 
+            $usuario = $_SESSION['id_usuario'];
+            $colmeias = "select * from colmeia WHERE id_usuario = $usuario;";
+            $colmeias = mysqli_query($conexao, $colmeias);
+
+            while ($colmeia = mysqli_fetch_assoc($colmeias)) {
+                $id_colmeia = $colmeia['id_colmeia'];
+                $label_colmeia = $colmeia['identificador'];
+                echo "<option value = '$id_colmeia'>$label_colmeia</option>";
+            }
+
+         ?>
+        </select>
+
+   
+
     <form action="" method="POST">
         <label for="nome">Data da verificação:</label>
         <input type="date" name="data_visita" id="data_visita" value="<?php echo $data_visita?>" required/>
