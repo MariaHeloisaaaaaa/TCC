@@ -11,8 +11,6 @@
 
    $usuario = $stmt->get_result()->fetch_assoc();
 
-   //var_dump($usuario);
-
    if ($usuario && password_verify($senha, $usuario['senha'])) {
 
       session_start(); 
