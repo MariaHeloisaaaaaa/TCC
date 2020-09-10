@@ -7,6 +7,7 @@
 <?php 
 
 		include_once "../../bd/conexao.php";
+		include_once "../../utils/validar_sessao.php";
 
 		
 		$sql_listar = "select * from verificacao ORDER BY data_visita ASC|DESC";

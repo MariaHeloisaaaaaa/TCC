@@ -88,9 +88,8 @@
         <input type="text" name="procedencia" id="procedencia" value="<?php echo $procedencia?>" required>
         <br>
 
-        <input type="submit" name="cadastrar" value="Cadastrar" onclick="lista_colmeia.php">
+        <input type="submit" name="cadastrar" value="Cadastrar">
     </form>
-         <li><a href="./verificacao_colmeia.php">Verificação Colméia</a></li>
 
 
     <br>

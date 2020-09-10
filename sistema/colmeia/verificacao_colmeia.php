@@ -2,6 +2,7 @@
 <?php
     session_start();
     include_once "../../bd/conexao.php";
+    include_once "../../utils/validar_sessao.php";
 
     $data_visita = NULL; 
     $producao = NULL;
@@ -26,7 +27,7 @@
         $anotacao = isset($_POST['anotacao']) ? $_POST['anotacao'] : NULL;
 
        
-            $stmt = $conexao->prepare("insert into verificacao (data_visita, producao, postura, lamina_nova, castilho, melgueira, rainha, anotacao, id_colmeia) values(?, ?, ?, ?, ?,?, ?, ?, ?)");
+            $stmt = $conexao->prepare("insert into verificacao (data_visita, producao, postura, lamina_nova, castilho, melgueira, rainha, anotacao, id_colmeia) values(?, ?, ?, ?, ?, ?, ?, ?, ?)");
             $stmt->bind_param("sssssissi", $data_visita, $producao, $postura, $lamina_nova, $castilho, $melgueira, $rainha, $anotacao, $id_colmeia);
             
         if ($stmt->execute()) {
@@ -66,8 +67,13 @@
                 $id_colmeia = $colmeia['id_colmeia'];
                 $label_colmeia = $colmeia['identificador'];
                 echo "<option value = '$id_colmeia'>$label_colmeia</option>";
-            }
+            }if (id_colmeia == $_GET['id']) {
+                echo "<option value = 'id_colmeia' selected='selected'>$label_colmeia</option>";
+            }else{
+                echo "<option value = 'id_colmeia'>$label_colmeia</option>";
 
+            
+        }
          ?>
         </select>
 

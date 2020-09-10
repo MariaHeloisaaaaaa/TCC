@@ -53,5 +53,19 @@
 	      echo $tabela;
 	   ?>
 	       
+	     <script>
+				var mensagem;
+				var retorno = confirm("Confirme a operação");
+				if (retorno == true)
+				{
+					window.location.href = "lista_verificacao?id=$vIdColmeia";
+		
+				}
+				else
+				{
+				   mensagem = "Você cancelou a operação";
+				}
+				document.write(mensagem);
+		</script>
 </body>
 </html>
