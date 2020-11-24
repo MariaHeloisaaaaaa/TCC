@@ -1,7 +1,9 @@
 <?php
-    session_start();
+    
     include_once "../../bd/conexao.php";
     include_once "../../utils/validar_sessao.php";
+
+    $texto_botao = "Cadastrar";
 
 
     $identificador = NULL; 
@@ -36,10 +38,9 @@
                 $stmt = $conexao->prepare("insert into colmeia (identificador,procedencia,id_usuario) values(?, ?, ?)");
                 $stmt->bind_param("ssi", $identificador, $procedencia, $_SESSION["id_usuario"]);
             }
-            var_dump($stmt);
             if ($stmt->execute()) {
                 echo "Colméia cadastrada com sucesso!";
-                header("location: .");
+                header("location: ./lista_colmeia.php");
             } else {
                 echo "Execute failed: (" . $stmt->errno . ") " . $stmt->error;
                 header("location:.?erro=1");
@@ -58,10 +59,14 @@
             // Bota nas variaveis para aparecer nos campos
             $identificador = $colmeia['identificador']; 
             $procedencia = $colmeia['procedencia'];
+            $texto_botao = "Atualizar";
         } else {
             // Destroi a sessão
             // redireciona para o login
-            header("location:../../index.php");
+        session_destroy();
+        header("location:../../index.php");
+
+
 
         }
     }
@@ -88,7 +93,7 @@
         <input type="text" name="procedencia" id="procedencia" value="<?php echo $procedencia?>" required>
         <br>
 
-        <input type="submit" name="cadastrar" value="Cadastrar">
+        <input type="submit" name="cadastrar" value="<?php echo $texto_botao?>">
     </form>
 
 

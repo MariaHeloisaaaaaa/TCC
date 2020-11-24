@@ -42,8 +42,7 @@
 	      echo $tabela;
 	   ?>
 
-	     <li><a href="./formulario_colmeia.php?id=$vIdColmeia">Editar</a></li>
-	     <li><a href="./formulario_colmeia.php?id=$vIdColmeia">Excluir</a></li>
+	     
 
 
 	       

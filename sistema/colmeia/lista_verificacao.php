@@ -9,10 +9,17 @@
 		include_once "../../bd/conexao.php";
 		include_once "../../utils/validar_sessao.php";
 
+
+		if(isset($_GET['id'])) {
+      
+        $stmt = $conexao->prepare("SELECT * FROM verificacao WHERE id_colmeia = ? AND id_usuario = ?");
+        $stmt->bind_param("ii", $_GET['id'], $_SESSION["id_usuario"]);
+        $stmt->execute();
+        
 		
-		$sql_listar = "select * from verificacao ORDER BY data_visita ASC|DESC";
+		//$sql_listar = "select * from verificacao ORDER BY data_visita ASC|DESC";
 		
-		$lista = mysqli_query($conexao, $sql_listar);
+		$lista = mysqli_query($conexao, $stmt);
 		
 		if ( mysqli_num_rows($lista) > 0 ) {
 					
