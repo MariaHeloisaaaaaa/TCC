@@ -5,15 +5,12 @@
 </head>
 <body>
 	<?php include_once "../../bd/conexao.php";
-		include_once "../../utils/validar_sessao.php"; ?>
+		include_once "../../utils/validar_sessao.php";?>
 
 <?php 
 
-		
 		$colmeia_id = $_GET['id'];
-		$sql_listar = "select * from verificacao where id_colmeia = $colmeia_id"
-;
-
+		$sql_listar = "select * from verificacao where id_colmeia = $colmeia_id";
 		
 		$lista = mysqli_query($conexao, $sql_listar);
 		
@@ -29,16 +26,14 @@
 				$vPostura  = $dados["postura"];
 				$vLamina_nova  = $dados["lamina_nova"];
 				$vCastilho  = $dados["castilho"];
-				$vMelgueira  = $dados["melgueira"];
+				$vMelgueira  = $dados["melgueira"]; 
 				$vRainha  = $dados["rainha"];
 				$vProducao = $dados["producao"];
 				$vAnotacao  = $dados["anotacao"];
 
-
 				
 				$tabela = $tabela."<tr><td>$vIdColmeia</td><td>$vData_visita</td><td>$vPostura</td><td>$vLamina_nova</td><td>$vCastilho</td><td>$vMelgueira</td><td>$vRainha</td><td>$vProducao</td><td>$vAnotacao</td>";
 				            
-			
 			}
 			
 			$tabela = $tabela."</table>";
@@ -53,19 +48,7 @@
 	   <?php
 	      echo $tabela;
 	   ?>
-	   <li><a href="./formulario_colmeia.php?id=<?php echo($_GET['id'])?>">Editar</a></li>
-	   <script>
-				function confirma_deletar(id){
-				var retorno = confirm("Tem certeza que desja excluir essa colmeia?");
-				if (retorno == true)
-				{
-					window.location.href = "excluir_colmeia?id="+id;
-	
-				}}
-		</script>
-	   <li><button onclick = "confirma_deletar(<?php echo($_GET['id'])?>)">Excluir</button></li>
-
-	       
-	     
+	   <br>
+	    <a href="verificacao_colmeia.php"><button>Nova verificação</button></a> 
 </body>
 </html>

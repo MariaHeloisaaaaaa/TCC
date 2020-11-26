@@ -49,31 +49,38 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cadastro de Verificação</title>
-</head>
+</head> 
 <body>
     <h1>Cadastro de Verificação</h1>
 
-    <forma action="" method="POST">
+    <form action="" method="POST">
         <label for="id_colmeia">Colmeia</label>
         <select name="id_colmeia">
         <?php 
+            $id_colmeia_selecionada = "0";
+            if(isset($_GET['id'])){
+                $id_colmeia_selecionada = $_GET['id']; 
+        }
+
             $usuario = $_SESSION['id_usuario'];
             $colmeias = "select * from colmeia WHERE id_usuario = $usuario;";
-            $colmeias = mysql_query($conexao, $colmeias);
+            $colmeias = mysqli_query($conexao, $colmeias);
             var_dump($colmeias);
-            while ($colmeia = mysql_fetch_assoc($colmeias)) {
+            while ($colmeia = mysqli_fetch_assoc($colmeias)) {
                 $id_colmeia = $colmeia['id_colmeia'];
                 $label_colmeia = $colmeia['identificador'] . " - " . $colmeia['procedencia'];
+            if ($id_colmeia = $id_colmeia_selecionada) {
+                echo "<option value = '$id_colmeia' selected='selected'>$label_colmeia</option>";
+            }else{
                 echo "<option value = '$id_colmeia'>$label_colmeia</option>";
-                            
+            }               
 
             }
 
          ?>
         </select>
 
-    </form>
-    <form action="" method="POST">
+        
         <label for="nome">Data da verificação:</label>
         <input type="date" name="data_visita" id="data_visita" value="<?php echo $data_visita?>" required/>
         <br>
