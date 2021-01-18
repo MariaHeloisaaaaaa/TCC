@@ -3,7 +3,8 @@
     include_once "../../bd/conexao.php";
     include_once "../../utils/validar_sessao.php";
 
-    $texto_botao = "Cadastrar";
+    $texto_botao = 'Cadastrar';
+    $texto_titulo = 'Cadastrar Colmeia';
 
 
     $identificador = NULL; 
@@ -56,10 +57,10 @@
         $colmeia = $stmt->get_result()->fetch_assoc();
         // Se a colméia existir
         if($colmeia) {
-            // Bota nas variaveis para aparecer nos campos
             $identificador = $colmeia['identificador']; 
             $procedencia = $colmeia['procedencia'];
-            $texto_botao = "Atualizar";
+            $texto_botao = 'Atualizar';
+            $texto_titulo = "Atualizar colmeia";
         } else {
             // Destroi a sessão
             // redireciona para o login
@@ -72,31 +73,6 @@
     }
 
 ?>
-
-
-
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cadastro de colméia</title>
-</head>
-<body>
-    <h1>Cadastro de Colméia</h1>
-    <form action="" method="POST">
-        <label for="identificador">Identificador:</label>
-        <input type="text" name="identificador" id="identificador" value="<?php echo $identificador?>" required/>
-        <br>
-
-        <label for="procedencia">Procedencia:</label>
-        <input type="text" name="procedencia" id="procedencia" value="<?php echo $procedencia?>" required>
-        <br>
-
-        <input type="submit" name="cadastrar" value="<?php echo $texto_botao?>">
-    </form>
-
-
     <br>
      <?php 
         if(count($mensagens) > 0){
@@ -110,3 +86,83 @@
 
 </body>
 </html>
+<html>
+<!DOCTYPE html>
+<html lang="pt">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>ApiSoft</title>
+        <!-- Favicon-->
+        <link rel="icon" type="image/x-icon" href="../../bootstrap/assets/img/favicon.ico" />
+        <!-- Font Awesome icons (free version)-->
+        <script src="https://use.fontawesome.com/releases/v5.15.1/js/all.js" crossorigin="anonymous"></script>
+        <!-- Google fonts-->
+        <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
+        <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css" />
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <link href="../../bootstrap/css/styles.css" rel="stylesheet" />
+    </head>
+
+    <body id="page-top">
+        <!-- Navigation-->
+        <nav class="navbar navbar-expand-lg bg-secondary text-uppercase fixed-top" id="mainNav">
+            <div class="container">
+                <a class="navbar-brand js-scroll-trigger" href="../../sistema/index.php">ApiSoft</a>
+                <button class="navbar-toggler navbar-toggler-right text-uppercase font-weight-bold bg-primary text-white rounded" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                    Menu
+                    <i class="fas fa-bars"></i>
+                </button>
+                 <div class="collapse navbar-collapse" id="navbarResponsive">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="lista_colmeia.php">Colmeias</a></li>
+                        <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="lista_verificacao.php">Verificações</a></li>
+                        <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="./../logout.php">Sair</a></li>
+                    </ul>
+                </div>
+               
+            </div>
+        </nav>
+         <!-- Contact Section-->
+        <section class="page-section" id="contact">
+            <div class="container">
+                <!-- Contact Section Heading-->
+                <p>
+                <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0"><?php echo $texto_titulo?></h2>
+                </p>
+                <!-- Icon Divider-->
+                <div class="divider-custom">
+                    <div class="divider-custom-line"></div>
+                    <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
+                    <div class="divider-custom-line"></div>
+                </div>
+                <!-- Contact Section Form-->
+                <div class="row">
+                    <div class="col-lg-8 mx-auto">
+                        <!-- To configure the contact form email address, go to mail/contact_me.php and update the email address in the PHP file on line 19.-->
+                        <form action="" method="post" id="contactForm" name="sentMessage" novalidate="novalidate">
+                            <div class="control-group">
+                                <div class="form-group floating-label-form-group controls mb-0 pb-2">
+                                    <label for="identificador">Identificador</label>
+                                    <input value="<?php echo $identificador?>" type = "text" minlength="3" required type="text" placeholder="Identificador" id="identificador" name="identificador" class="form-control" required="required" data-validation-required-message="Por favor informe seu nome."/>
+                                    <p class="help-block text-danger"></p>
+                                </div>
+                                <div class="control-group">
+                                <div class="form-group floating-label-form-group controls mb-0 pb-2">
+                                    <label for="procedencia">Procedencia</label>
+                                    <input type="text" id="procedencia" name="procedencia" class="form-control" placeholder="Procedência" required="required" data-validation-required-message="Por favor informe a procedência da sua colmeia." />
+                                    <p class="help-block text-danger"></p>
+                                </div>
+                            
+                            </div>
+                            <br />
+                            <div id="success"></div>
+                            <div class="form-group" value="<?php echo $texto_botao?>" type="submit"><button class="btn btn-primary btn-xl" id="sendMessageButton" input type="submit" name="cadastrar" button><?php echo $texto_botao?></div>
+                            
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
